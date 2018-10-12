@@ -56,6 +56,8 @@ Merging from one branch to a new branch is a little different.  You'll need to `
 
 For every branch that you have in your ~/branches folder an alias is created to make it easy for you to get to that location quickly.  For example if you have a branch for dev01, all you have to do to get there is open the terminal and run `dev01`.  Same for getting to the `tag` or `trunk`.
 
+To update the list of branches in the aliases after you added or deleted a branch, run `updatebranchaliases`.
+
 ---
 
 ### Helpers
