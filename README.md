@@ -28,9 +28,11 @@ Please make sure that you have DiffMerge installed and that open it with this co
 #### Update
 `update` - gets the latest updates from the repo
 
-
 #### Status
 `status` - will show all of the files with changes that have not been committed
+
+#### Revert
+`revert` - will revert all changes in the current change list.
 
 #### Commit 
 `commit {{bug number}} "your commit message"` - will commit all changes.  Make sure you add or remove files as needed.  if you see ! before a file or directory when running `status` it needs to added or removed.
