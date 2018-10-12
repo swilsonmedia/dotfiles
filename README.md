@@ -47,6 +47,9 @@ Please make sure that you have DiffMerge installed and that open it with this co
 ### Merge
 `merge {{bug number}} "your commit message"` - does the work of merging code from your current branch to the trunk and then, optionally, that tag and/or staging if required.  Watch the terminal for prompts.
 
+### Revs
+Merging from one branch to a new branch is a little different.  You'll need to `cd` into the "last" folder and run `revs {{case number}}`.  That command will return the crazy svn command needed to add those changes to your current branch.  cd back into the "current" folder and run that command that `revs {{case number}}` created for you.  Once that has run, make sure to commit those changes.
+
 ---
 
 ### Aliases
