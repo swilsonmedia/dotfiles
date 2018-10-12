@@ -31,6 +31,13 @@ Please make sure that you have DiffMerge installed and that open it with this co
 #### Status
 `status` - will show all of the files with changes that have not been committed
 
+#### Add
+`add {{file or directory}}` - will add the file or directory to svn.  Make sure you commit after.
+
+
+#### Delete
+`delete {{file or directory}}` - will delete the file or directory from svn.  Make sure you commit after.
+
 #### Revert
 `revert` - will revert all changes in the current change list.
 
