@@ -1,0 +1,27 @@
+#!/bin/bash
+
+BUG=$1
+USER=$(id -un)
+
+if [[ -z $BUG ]] 
+then
+	echo "What is the case number?"
+	read BUG
+fi
+
+TOMORROW=`date -j -v+1d +%Y-%m-%d`
+FIRSTDAYOFYEAR=`date -j -v-3m +%Y-%m-%d`
+
+echo "Searching for revisions belonging to case #$BUG from $FIRSTDAYOFYEAR to $TOMORROW"
+
+REVS=$(svn log -r {$FIRSTDAYOFYEAR}:{$TOMORROW} | grep -B4 "BugzId: $BUG" | grep $USER | cut -d '|' -f1 | cut -d 'r' -f2 | sort -n)
+
+if [[ -z $REVS ]]
+then
+	echo "No revisions were found for $BUG"
+else
+	REVS=$(echo $REVS | sed 's/ /,/g') 
+	COMMIT=$(svn info | grep URL | cut -d / -f6,7,8)
+	echo $COMMIT
+	echo "Here is the merge code: svn merge -c$REVS ^/$COMMIT --ignore-ancestry"
+fi
