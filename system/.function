@@ -1,0 +1,161 @@
+# Create a new directory and enter it
+mkd () { mkdir -p "$1" && cd "$1"; }
+
+# Open man page as PDF
+function manpdf() {
+ man -t "${1}" | open -f -a /Applications/Preview.app/
+}
+
+
+# SVN helpers
+# -------------------------------
+
+switchBranch(){
+	branch=$1
+
+	if [[ -z $branch ]]
+	then
+		echo "What is the branch number?"
+		read branch
+	fi
+
+	if [ ! -d "current" ] | [ ! -d "last" ]
+	then
+		echo "Make sure you have checked out before using 'switch' or that you are in branch directory"
+		return 1
+	else
+		cd current/
+		oldBranch=$(svn info | grep URL:.h | cut -d / -f7)
+
+		cd ../last		
+		svn switch http://scmserver/svn/smartpak/branches/$oldBranch/SPE_2_0
+
+		cd ../current
+		svn switch http://scmserver/svn/smartpak/branches/$branch/SPE_2_0
+
+		echo 'Done!'
+	fi;
+}
+
+switchTag(){
+	tag=$1
+
+	if [[ -z $tag ]]
+	then
+		echo "What is the tag number?"
+		read tag
+	fi
+
+	cd ~/branches/tag/
+
+	if [ ! -d "current" ] | [ ! -d "last" ]
+	then
+		echo "Make sure you have checked out before using 'switch'"
+		return 1
+	else
+		cd ~/branches/tag/current/
+		oldTag=$(svn info | grep URL:.h | cut -d / -f7)
+
+		cd ../last		
+		svn switch http://scmserver/svn/smartpak/tags/$oldTag/SPE_2_0
+
+		cd ../current
+		svn switch http://scmserver/svn/smartpak/tags/$tag/SPE_2_0
+
+		echo 'Done!'
+	fi;
+}
+
+merge () {
+	BUG=$1
+	MSG=$2
+	USER=$(id -un)
+
+	if [[ -z $BUG ]] 
+	then
+		echo "What is the case number?"
+		read BUG
+	fi
+
+	if [[ -z $MSG ]] 
+	then
+		echo "What is the commit message?"
+		read MSG
+	fi
+
+	COMMITMSG="BugzId: $BUG - $MSG"
+
+	TOMORROW=`date -j -v+1d +%Y-%m-%d`
+	THREEMONTHSAGO=`date -j -v-3m +%Y-%m-%d`
+
+	echo "Searching for revisions belonging to case #$BUG from $THREEMONTHSAGO to $TOMORROW"
+
+	REVS=$(svn log --search $USER -r {$THREEMONTHSAGO}:{$TOMORROW} | grep -B4 "BugzId: $BUG" | grep $USER | cut -d '|' -f1 | cut -d 'r' -f2 | sort -n)
+
+	if [[ -z $REVS ]]
+	then
+		echo "No revisions were found for $BUG"
+		return 1
+	else
+		REVS=$(echo $REVS | sed 's/ /,/g') 
+		COMMIT=$(svn info | grep URL | cut -d / -f6,7,8)
+
+		echo "Merging to the trunk with message: $COMMITMSG"
+		trunk && svn update && svn merge -c$REVS ^/$COMMIT --ignore-ancestry && svn commit -m "$COMMITMSG"
+		echo "Done merging to the trunk!"
+		echo "..."
+		echo "Do you want to merge to the tag?"
+		echo "Y or N?"
+		read TAGMERGE
+
+		if [ "$TAGMERGE" != "Y" ] && [ "$TAGMERGE" != "y" ];
+		then
+			exit 1
+		fi 
+
+		echo "Merging to the tag with message: $COMMITMSG"
+		tag && svn update && svn merge -c$REVS ^/$COMMIT --ignore-ancestry && svn commit -m "$COMMITMSG"
+		echo "Done merging to the tag!"
+		echo "..."
+
+		echo "Do you want to merge to the staging?"
+		echo "**************"
+		echo "only needed for continious delivery on tag cutting weeks, after a tag was cut"
+		echo "**************"
+		echo "Y or N?"
+		read STAGINGMERGE
+
+		if [ "$STAGINGMERGE" != "Y" ] && [ "$STAGINGMERGE" != "y" ];
+		then
+			exit 1
+		fi 
+
+		echo "Merging to staging with message: $COMMITMSG"
+		.. && cd last && svn update && svn merge -c$REVS ^/$COMMIT --ignore-ancestry && svn commit -m "$COMMITMSG"
+		echo "Done merging to staging!"		
+	fi
+}
+
+commit () {
+	BUG=$1
+	MSG=$2
+
+	if [[ -z $BUG ]] 
+	then
+		echo "What is the case number?"
+		read BUG
+	fi
+
+	if [[ -z $MSG ]] 
+	then
+		echo "What is the commit message?"
+		read MSG
+	fi
+
+	COMMITMSG="BugzId: $BUG - $MSG"
+
+	echo "committing with message: $COMMITMSG"
+
+	svn commit -m "$COMMITMSG"
+}
+

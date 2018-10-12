@@ -1,0 +1,6 @@
+
+alias dev01="cd ~/branches/dev01/current"
+alias dev04="cd ~/branches/dev04/current"
+alias phpapps="cd ~/branches/phpapps/current"
+alias tag="cd ~/branches/tag/current"
+alias trunk="cd ~/branches/trunk"
