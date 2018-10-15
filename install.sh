@@ -5,5 +5,6 @@ ln -sv /Users/$USER/dotfiles/.bash_profile ~/
 
 chmod +x /Users/$USER/dotfiles/scripts/diffmerge-svnmerge.sh
 chmod +x /Users/$USER/dotfiles/scripts/svn-diffwrap.sh
+chmod +x /Users/$USER/dotfiles/bin/revs
+chmod +x /Users/$USER/dotfiles/bin/updatebranchaliases
 
-. ~/.bash_profile
