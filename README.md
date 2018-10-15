@@ -35,7 +35,6 @@ Please make sure that you have DiffMerge installed and that open it with this co
 #### Add
 `add {{file or directory}}` - will add the file or directory to svn.  Make sure you commit after.
 
-
 #### Delete
 `delete {{file or directory}}` - will delete the file or directory from svn.  Make sure you commit after.
 
