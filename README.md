@@ -8,6 +8,7 @@
 2. Make sure the directory is named "dotfiles"
 3. Open terminal and cd into the dotfiles directory `cd dotfiles`
 4. Run `bash install.sh`
+5. Close and Restart your terminal to load all the new commands.
 
 ---
 
