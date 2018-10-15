@@ -43,7 +43,7 @@ Please make sure that you have DiffMerge installed and that open it with this co
 `revert` - will revert all changes in the current change list.
 
 #### Commit 
-`commit {{bug number}} "your commit message"` - will commit all changes.  Make sure you add or remove files as needed.  if you see ! before a file or directory when running `status` it needs to added or removed.
+`commit {{bug number}} "your commit message"` - will commit all changes.  Make sure you add or remove files as needed.  if you see ! or ? before a file or directory when running `status` it needs to added(?) or removed(!).
 
 #### Merge
 `merge {{bug number}} "your commit message"` - does the work of merging code from your current branch to the trunk and then, optionally, that tag and/or staging if required.  Watch the terminal for prompts.
