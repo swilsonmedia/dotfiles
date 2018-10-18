@@ -1,6 +1,13 @@
 
+alias dev*="cd ~/branches/dev*/current"
+alias dev*e="dev* && edit"
 alias dev01="cd ~/branches/dev01/current"
+alias dev01e="dev01 && edit"
 alias dev04="cd ~/branches/dev04/current"
+alias dev04e="dev04 && edit"
 alias phpapps="cd ~/branches/phpapps/current"
+alias phpappse="phpapps && edit"
 alias tag="cd ~/branches/tag/current"
+alias tage="tag && edit"
 alias trunk="cd ~/branches/trunk"
+alias trunke="trunk && edit"

@@ -50,11 +50,16 @@ Please make sure that you have DiffMerge installed and that open it with this co
 #### Revs
 Merging from one branch to a new branch is a little different.  You'll need to `cd` into the "last" folder and run `revs {{case number}}`.  That command will return the crazy svn command needed to add those changes to your current branch.  cd back into the "current" folder and run that command that `revs {{case number}}` created for you.  Once that has run, make sure to commit those changes.
 
+#### Clean
+`clean` - removes .edit files that are created by SVN for conflicts
+
 ---
 
 ### Aliases
 
 For every branch that you have in your ~/branches folder an alias is created to make it easy for you to get to that location quickly.  For example if you have a branch for dev01, all you have to do to get there is open the terminal and run `dev01`.  Same for getting to the `tag` or `trunk`.
+
+All branch alias also have a 'e' variant that updates svn and opens and editor right away.  Ex: dev04e
 
 To update the list of branches in the aliases after you added or deleted a branch, run `updatebranchaliases`.
 
@@ -62,6 +67,6 @@ To update the list of branches in the aliases after you added or deleted a branc
 
 ### Helpers
 
-`edit` - once you cd into a branch you can easily open the site's code and unit testing code in your editor by running `edit`.  It is a best practice to run `update` before you `edit`.
+`edit` - once you cd into a branch you can easily open the site's code and unit testing code in your editor by running `edit`.  It also gets updates from SVN before opening in an editor so that you are always up-to-date.
 
 
