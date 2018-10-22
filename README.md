@@ -69,4 +69,5 @@ To update the list of branches in the aliases after you added or deleted a branc
 
 `edit` - once you cd into a branch you can easily open the site's code and unit testing code in your editor by running `edit`.  It also gets updates from SVN before opening in an editor so that you are always up-to-date.
 
+`server` - if you ever need a local server so that you don't get Ajax errors or cross domain errors you can run `server` then go to localhost:8000 to visit your page.
 
