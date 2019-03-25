@@ -70,6 +70,7 @@ merge () {
 	BUG=$1
 	MSG=$2
 	USER=$(id -un)
+	LOCATION=$(pwd)
 
 	if [[ -z $BUG ]] 
 	then
@@ -95,6 +96,7 @@ merge () {
 	if [[ -z $REVS ]]
 	then
 		echo "No revisions were found for $BUG"
+		cd $LOCATION
 		return 1
 	else
 		REVS=$(echo $REVS | sed 's/ /,/g') 
@@ -110,7 +112,8 @@ merge () {
 
 		if [ "$TAGMERGE" != "Y" ] && [ "$TAGMERGE" != "y" ];
 		then
-			exit 1
+			cd $LOCATION
+			return 1
 		fi 
 
 		echo "Merging to the tag with message: $COMMITMSG"
@@ -127,7 +130,8 @@ merge () {
 
 		if [ "$STAGINGMERGE" != "Y" ] && [ "$STAGINGMERGE" != "y" ];
 		then
-			exit 1
+			cd $LOCATION
+			return 1
 		fi 
 
 		echo "Merging to staging with message: $COMMITMSG"
@@ -158,4 +162,3 @@ commit () {
 
 	svn commit -m "$COMMITMSG"
 }
-
