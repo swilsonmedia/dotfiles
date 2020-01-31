@@ -14,7 +14,7 @@ FIRSTDAYOFYEAR=`date -j -v-3m +%Y-%m-%d`
 
 echo "Searching for revisions belonging to case #$BUG from $FIRSTDAYOFYEAR to $TOMORROW"
 
-REVS=$(svn log -r {$FIRSTDAYOFYEAR}:{$TOMORROW} | grep -B4 "BugzId: $BUG" | grep -i $USER | cut -d '|' -f1 | cut -d 'r' -f2 | sort -n)
+REVS=$(svn log -r {$FIRSTDAYOFYEAR}:{$TOMORROW} | grep -i -B4 "BugzId: $BUG" | grep -i $USER | cut -d '|' -f1 | cut -d 'r' -f2 | sort -n)
 
 if [[ -z $REVS ]]
 then
