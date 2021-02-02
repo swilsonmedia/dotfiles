@@ -12,6 +12,7 @@ alias revert="svn revert . -R"
 alias add="svn add"
 alias delete="svn delete"
 alias clean="svn status | grep edited | cut -d '?' -f2 | xargs rm"
+alias diff="svn diff --diff-cmd ~/dotfiles/scripts/svn-diffwrap.sh" 
 alias uglify="uglifyjs --compress expression=true --mangle -- "
 alias minify="html-minifier --collapse-whitespace --remove-comments --remove-tag-whitespace --minify-css true --minify-js true "
 

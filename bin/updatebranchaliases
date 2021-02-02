@@ -19,8 +19,6 @@ for file in DEV*/; do
 	echo "alias $f$e=\"$f && edit\"" >> ~/dotfiles/system/.branches
 done
 
-echo "alias phpapps=\"cd ~/branches/phpapps/current\"" >> ~/dotfiles/system/.branches
-echo "alias phpappse=\"phpapps && edit\"" >> ~/dotfiles/system/.branches
 echo "alias tag=\"cd ~/branches/tag/current\"" >> ~/dotfiles/system/.branches
 echo "alias tage=\"tag && edit\"" >> ~/dotfiles/system/.branches
 echo "alias trunk=\"cd ~/branches/trunk\"" >> ~/dotfiles/system/.branches
