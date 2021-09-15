@@ -141,24 +141,59 @@ merge () {
 }
 
 commit () {
-	BUG=$1
-	MSG=$2
+	LOCATION=${PWD##*/}
 
-	if [[ -z $BUG ]] 
+	if [ $LOCATION = "current" ] || [ $LOCATION = "last" ] || [ $LOCATION = "SPEWeb" ]
 	then
-		echo "What is the case number?"
-		read BUG
+
+		if [ $LOCATION != "SPEWeb" ]
+		then
+			cd SPEWeb
+		fi
+
+		BUG=$1
+		MSG=$2
+
+		if [[ -z $BUG ]] 
+		then
+			echo "What is the case number?"
+			read BUG
+		fi
+
+		if [[ -z $MSG ]] 
+		then
+			echo "What is the commit message?"
+			read MSG
+		fi
+
+		COMMITMSG="BugzId: $BUG - $MSG"
+		
+		
+		echo "\n\nRunning Linting and Unit Tests\n\n";
+
+		npm run test
+		if [ $? -eq 1 ]
+		then
+			echo "\n\n----------------------------------------\n"
+			echo "Ouch, something is broken.  Better fix it and try again."
+			echo "\n----------------------------------------\n\n"
+			return 1  
+		fi
+
+		if [ $LOCATION != "SPEWeb" ]
+		then
+			cd ../
+		fi
+		
+		echo "\n\nCommitting with message: $COMMITMSG"
+		svn commit -m "$COMMITMSG"
+
+		echo "\n\n----------------------------------------\n"
+		echo "Boom, Done! See you next time!"
+		echo "\n----------------------------------------\n\n"
+
+	else
+		echo "Please run on a working directory"
+		return 1;
 	fi
-
-	if [[ -z $MSG ]] 
-	then
-		echo "What is the commit message?"
-		read MSG
-	fi
-
-	COMMITMSG="BugzId: $BUG - $MSG"
-
-	echo "committing with message: $COMMITMSG"
-
-	svn commit -m "$COMMITMSG"
 }
