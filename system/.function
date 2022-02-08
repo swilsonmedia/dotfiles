@@ -91,7 +91,7 @@ merge () {
 
 	echo "Searching for revisions belonging to case #$BUG from $THREEMONTHSAGO to $TOMORROW"
 
-	REVS=$(svn log --stop-on-copy | grep -i -B2 "BugzID: $BUG" | cut -d '|' -f1 | cut -d 'r' -f2 | sort -n)
+	REVS=$(svn log --stop-on-copy | grep -i -B4 "BugzID: $BUG" | grep -e '^r\d*' | cut -d '|' -f1 | cut -d 'r' -f2 | sort -n)
 
 	if [[ -z $REVS ]]
 	then
