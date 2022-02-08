@@ -91,7 +91,7 @@ merge () {
 
 	echo "Searching for revisions belonging to case #$BUG from $THREEMONTHSAGO to $TOMORROW"
 
-	REVS=$(svn log --search $USER -r {$THREEMONTHSAGO}:{$TOMORROW} | grep -i -B4 "BugzId: $BUG" | grep -i $USER | cut -d '|' -f1 | cut -d 'r' -f2 | sort -n)
+	REVS=$(svn log --stop-on-copy | grep -i -B2 "BugzID: $BUG" | cut -d '|' -f1 | cut -d 'r' -f2 | sort -n)
 
 	if [[ -z $REVS ]]
 	then
@@ -168,10 +168,15 @@ commit () {
 
 		COMMITMSG="BugzId: $BUG - $MSG"
 		
+		echo "\n\nBuilding bundles\n\n"
+		npm run bundle-prod
+
+		echo "\n\nRunning SASS\n\n"
+		npm run sass
 		
 		echo "\n\nRunning Linting and Unit Tests\n\n";
-
 		npm run test
+
 		if [ $? -eq 1 ]
 		then
 			echo "\n\n----------------------------------------\n"
