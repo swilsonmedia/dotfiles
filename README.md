@@ -12,59 +12,30 @@
 
 ---
 
-### Setting up SVN to use DiffMerge
-
-Please make sure that you have DiffMerge installed and that open it with this command: 
-`/Applications/DiffMerge.app/Contents/MacOS/DiffMerge`
-
-1. run `$EDITOR .subversion/config`
-2. Look for "diff-cmd" around like 46.  Set it to "diff-cmd = /Users/{{username}}/dotfiles/scripts/svn-diffwrap.sh".  Make sure to replace the username with yours.
-3. Look for "merge-tool-cmd" around line 61.  Set it to "merge-tool-cmd = /Users/{{username}}/dotfiles/scripts/diffmerge-svnmerge.sh". Again, replace the username.
-4. save and close.
-
 ## Commands
 
-### SVN commands
+### GIT Commands
 
-#### Update
-`update` - gets the latest updates from the repo
+- `status` is an alias for `git status`
+- `pull` is an alias for `git pull`
+- `push` is an alias for `git push`
+- `restore` is an alias for `git restore`
+- `restoreall` is an alias for `git restore .`
+- `add` is an alias for `git add`
+- `addall` is an alias for `git add .`
+- `cleanup` is an alias for `fred git cleanup -c`
+- `checkout` is an alias for `fred git checkout -c`
+- `commit` is an alias for `fred git commit -m`
+- `merge` is an alias for `fred git merge -c`
+- `switch` is an alias for `fred git switch -c`
+- `branch` is an alias for `git branch`
 
-#### Status
-`status` - will show all of the files with changes that have not been committed
-
-#### Add
-`add {{file or directory}}` - will add the file or directory to svn.  Make sure you commit after.
-
-#### Delete
-`delete {{file or directory}}` - will delete the file or directory from svn.  Make sure you commit after.
-
-#### Revert
-`revert` - will revert all changes in the current change list.
-
-#### Commit 
-`commit {{bug number}} "your commit message"` - will commit all changes.  Make sure you add or remove files as needed.  if you see ! or ? before a file or directory when running `status` it needs to added(?) or removed(!).
-
-#### Merge
-`merge {{bug number}} "your commit message"` - does the work of merging code from your current branch to the trunk and then, optionally, that tag and/or staging if required.  Watch the terminal for prompts.
-
-
-
-#### Clean
-`clean` - removes .edit files that are created by SVN for conflicts
-
----
-
-### Aliases
-
-For every branch that you have in your ~/branches folder an alias is created to make it easy for you to get to that location quickly.  For example if you have a branch for dev01, all you have to do to get there is open the terminal and run `dev01`.  Same for getting to the `tag` or `trunk`.
-
-All branch alias also have a 'e' variant that updates svn and opens and editor right away.  Ex: dev04e
-
----
+You'll notice references to "fred", if you haven't already please clone and install:
+https://github.com/swilsonmedia/fred
 
 ### Helpers
 
-`edit` - once you cd into a branch you can easily open the site's code and unit testing code in your editor by running `edit`.  It also gets updates from SVN before opening in an editor so that you are always up-to-date.
+`edit` - opens your editor to SPEWeb
 
 `server` - if you ever need a local server so that you don't get Ajax errors or cross domain errors you can run `server` then go to localhost:8000 to visit your page.
 
