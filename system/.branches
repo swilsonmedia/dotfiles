@@ -1,7 +1,0 @@
-
-alias dev11="cd ~/branches/dev11/current"
-alias dev11e="dev11 && edit"
-alias tag="cd ~/branches/tag/current"
-alias tage="tag && edit"
-alias trunk="cd ~/branches/trunk"
-alias trunke="trunk && edit"
