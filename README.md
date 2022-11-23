@@ -35,7 +35,7 @@ https://github.com/swilsonmedia/fred
 
 ### Helpers
 
-`edit` - opens your editor to SPEWeb
+`dev` - opens your devor to SPEWeb
 
 `server` - if you ever need a local server so that you don't get Ajax errors or cross domain errors you can run `server` then go to localhost:8000 to visit your page.
 

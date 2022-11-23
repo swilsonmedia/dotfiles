@@ -3,7 +3,7 @@ alias ..='cd ../'
 alias ...='cd ../../' 
 alias server="python -m SimpleHTTPServer 8000"
 
-alias edit="$EDITOR ~/repos/master/SPE_2_0/SPEWeb"
+alias dev="$EDITOR ~/repos/master/SPE_2_0/SPEWeb"
 
 alias status="git status"
 alias pull="git pull"
