@@ -40,3 +40,7 @@ https://github.com/swilsonmedia/fred
 `server` - if you ever need a local server so that you don't get Ajax errors or cross domain errors you can run `server` then go to localhost:8000 to visit your page.
 
 `mkd {{enter new folder name}}` - will create a new folder and cd you into it. 
+
+### Alias
+
+To create your own custom alias command create run `touch .useralias`.  Git will ignore it.  Look at `system/.alias` for examples.
