@@ -5,7 +5,7 @@ for DOTFILE in "$HOME"/dotfiles/system/.{path,env,alias,branches,function,comple
   [ -f "$DOTFILE" ] && source "$DOTFILE"
 done
 
-[ -f ".useralias" ] && source ".useralias"
+[ -f "$HOME/dotfiles/.useralias" ] && source "$HOME/dotfiles/.useralias"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
